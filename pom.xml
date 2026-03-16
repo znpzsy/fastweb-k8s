@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
    <modelVersion>1.0.0</modelVersion>
-   <groupId>com.telenity.vasconsolidation.consportals_in_vil</groupId>
+   <groupId>com.telenity.vasconsolidation.consolportals_it_fastweb</groupId>
    <artifactId>parent-vil</artifactId>
    <version>1.0.0.0-SNAPSHOT</version>
    <packaging>pom</packaging>
@@ -17,9 +17,9 @@
    </properties>
    
    <scm>
-      <connection>scm:git:ssh://git@stash.telenity.com:7999/vasconsol/consportals_in_vil.git</connection>
-      <developerConnection>scm:git:ssh://git@stash.telenity.com:7999/vasconsol/consportals_in_vil.git</developerConnection>
-      <url>https://stash.telenity.com/projects/VASCONSOL/repos/consportals_in_vil/browse</url>
+      <connection>scm:git:ssh://git@stash.telenity.com:7999/vasconsol/consolportals_it_fastweb.git</connection>
+      <developerConnection>scm:git:ssh://git@stash.telenity.com:7999/vasconsol/consolportals_it_fastweb.git</developerConnection>
+      <url>https://stash.telenity.com/projects/VASCONSOL/repos/consolportals_it_fastweb/browse</url>
    </scm>
     
    <distributionManagement>
