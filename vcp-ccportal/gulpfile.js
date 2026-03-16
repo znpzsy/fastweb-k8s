@@ -149,7 +149,8 @@ gulp.task('fast-dist-watch', function () {
 gulp.task('connect', ['fast-dist'], function () {
     return connect.server({
         root: bases.src,
-        port: 8085,
+        host: "0.0.0.0",
+        port: 8081,
         middleware: function (connect) {
             return [
                 connect().use('/ccportal/i18n', serveStatic('i18n')),

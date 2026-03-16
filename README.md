@@ -112,7 +112,7 @@ The sandbox mimics the production traffic flow using containerized components:
 
 - **Kubernetes Ingress**
     - [consolportals_sa_stc_ingress.yaml](stc/vcp/k8s/consolportals_sa_stc_ingress.yaml) replaces `httpd` as the public-facing router. All routes handled by A3GW + httpd are now defined in Ingress resources, using NGINX as the controller and path-based routing to forward requests to the appropriate services.
-    - [consolportals-sa-stc-vcp-httpd-ingress.yaml](stc/vcp/k8s/consolportals-sa-stc-vcp-httpd-ingress.yaml) replaces `httpd` Ingress routes everything to httpd, which then handles the ProxyPass logic.
+    - [consolportals-sa-fastweb-vcp-httpd-ingress.yaml](stc/vcp/k8s/consolportals-sa-fastweb-vcp-httpd-ingress.yaml) replaces `httpd` Ingress routes everything to httpd, which then handles the ProxyPass logic.
     -
 
 ## Main Paths & Responsibilities
@@ -128,7 +128,7 @@ The sandbox mimics the production traffic flow using containerized components:
 | `/img/captcha.png`          | Ingress → a3gw (port 8445) | CAPTCHA delivery                      |
 
 
-[consolportals-sa-stc-vcp-httpd-ingress.yaml](stc/vcp/k8s/consolportals-sa-stc-vcp-httpd-ingress.yaml)
+[consolportals-sa-fastweb-vcp-httpd-ingress.yaml](stc/vcp/k8s/consolportals-sa-fastweb-vcp-httpd-ingress.yaml)
 Access with default http ports (80, 443).
 
 | Path                        | Handled By                           | Description                           |
