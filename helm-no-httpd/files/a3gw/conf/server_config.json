@@ -11,7 +11,7 @@
     "refreshTokenName": "refreshToken"
   },
   "rateLimit": {
-    "enabled": true,
+    "enabled": false,
     "expiration": 900,
     "max": 1000
   },

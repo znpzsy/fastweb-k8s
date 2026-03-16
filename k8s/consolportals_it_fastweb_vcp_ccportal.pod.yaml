@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: consolportals-it-fastweb-vcp-ccportal
+  labels:
+    component: vcp-ccportal
+spec:
+  containers:
+    - name: vcp-ccportal
+      image: nexus.telenity.com/com/telenity/consolportals-it-fastweb-vcp-ccportal:1.0.0.0
+      ports:
+        - containerPort: 8081

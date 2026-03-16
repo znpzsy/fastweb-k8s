@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: consolportals-it-fastweb-vcp-httpd
+  labels:
+    component: vcp-httpd
+spec:
+  containers:
+    - name: vcp-httpd
+      image: nexus.telenity.com/com/telenity/consolportals-it-fastweb-vcp-httpd:1.0.0.0
+      ports:
+        - containerPort: 80
+        - containerPort: 443
+      resources:
+        limits:
+          memory: "512Mi"
+          cpu: "500m"
+        requests:
+          memory: "256Mi"
+          cpu: "250m"
