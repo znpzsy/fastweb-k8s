@@ -327,16 +327,6 @@
     ]
   },
   {
-    "name": "ring-back-tone-sms-automation",
-    "target": "http://10.35.39.103:9090",
-    "contextList": [
-      {
-        "path": "/rbt-sms-automation-rest",
-        "rewrite": "/crbt/smsautomation"
-      }
-    ]
-  },
-  {
     "name": "ring-back-tone-backend",
     "target": "http://10.35.39.102:8080",
     "contextList": [
@@ -505,16 +495,6 @@
     ]
   },
   {
-    "name": "ssm-campaign-services",
-    "target": "http://10.35.39.105:3333",
-    "contextList": [
-      {
-        "path": "/ssm-campaigns-rest",
-        "rewrite": "/apis/v1"
-      }
-    ]
-  },
-  {
     "name": "ssm-subscriptions-services",
     "target": "http://10.35.39.105:9092",
     "contextList": [
@@ -667,7 +647,7 @@
   },
   {
     "name": "bulk-messaging-gr",
-    "target": "http://10.35.39.106:8080",
+    "target": "http://10.35.39.106:9080",
     "contextList": [
       {
         "path": "/bms-bulkmsg-config-gr-rest",
@@ -714,3 +694,5 @@
     ]
   }
 ]
+
+

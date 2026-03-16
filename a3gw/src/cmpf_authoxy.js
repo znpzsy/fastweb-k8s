@@ -258,7 +258,7 @@ CMPFAuthoxy.prototype.startServer = function (port) {
         var application = _.findWhere(serverConfig.applications, {resourceName: requestResourceName});
 
         // Check if captcha is enabled and different from the url "/refresh-token" for the application.
-        if (application && application.captchaEnabled && (req.url === '/cmpf-rest/authenticate' || req.url === '/cmpf-rest/authenticate/subscriber')) {
+        if (application && application.captchaEnabled && req.url !== '/refresh-token') {
             var result = {};
 
             let captchaText = req.body[CaptchaListener.captchaFieldName];

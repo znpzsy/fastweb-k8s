@@ -2,7 +2,7 @@
   "servicesBase": "/vcp/services",
   "logLevel": "error",
   "proxy": {
-    "servicesHttpHost": "127.0.0.1",
+    "servicesHttpHost": "0.0.0.0",
     "servicesHttpPort": "8444"
   },
   "auth": {
@@ -11,7 +11,7 @@
     "refreshTokenName": "refreshToken"
   },
   "rateLimit": {
-    "enabled": true,
+    "enabled": false,
     "expiration": 900,
     "max": 1000
   },
@@ -19,7 +19,7 @@
     {
       "resourceName": "VCP Admin Portal",
       "path": "/adminportal",
-      "targetHost": "http://localhost:8085",
+      "targetHost": "http://vcpadminportal:8080",
       "pathRewrite": {
         "^/adminportal": "/adminportal"
       }
@@ -27,7 +27,7 @@
     {
       "resourceName": "VCP Customer Care Portal",
       "path": "/ccportal",
-      "targetHost": "http://localhost:8085",
+      "targetHost": "http://vcpccportal:8081",
       "pathRewrite": {
         "^/ccportal": "/ccportal"
       }
@@ -35,7 +35,7 @@
     {
       "resourceName": "VCP Partner Portal",
       "path": "/partnerportal",
-      "targetHost": "http://localhost:8085",
+      "targetHost": "http://vcppartnerportal:8082",
       "pathRewrite": {
         "^/partnerportal": "/partnerportal"
       },
@@ -45,7 +45,14 @@
       "path": "/conf",
       "targetHost": "http://localhost:8085",
       "pathRewrite": {
-        "^/conf": "/conf"
+        "^/conf": "/"
+      }
+    },
+    {
+      "path": "/site.json",
+      "targetHost": "http://localhost:8086",
+      "pathRewrite": {
+        "^/site.json": "/site.json"
       }
     }
   ],
@@ -57,7 +64,7 @@
       "css",
       "js",
       "map",
-      "tff",
+      "ttf",
       "woff",
       "woff2",
       "svg",
@@ -73,7 +80,8 @@
     ],
     "allowedFiles": [
       "app.html",
-      "index.html"
+      "index.html",
+      "site.json"
     ],
     "allowedDirectories": [
       "/public",
@@ -85,9 +93,7 @@
       "/pentaho/getImage"
     ],
     "allowedRestServices": [
-      "/workflows-otp-rest",
-      "/workflows-partner-registration-rest",
-      "/workflows-rest/partner/password/reset"
+      "/workflows-otp-rest"
     ]
   }
 }

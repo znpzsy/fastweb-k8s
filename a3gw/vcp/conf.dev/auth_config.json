@@ -1,5 +1,5 @@
 {
-  "httpHost": "127.0.0.1",
+  "httpHost": "0.0.0.0",
   "httpPort": "8445",
   "accountsPath": "/cmpf-rest/useraccounts",
   "accountsUrl": "http://10.35.39.101:9610/axis2/cmpf/useraccounts",
