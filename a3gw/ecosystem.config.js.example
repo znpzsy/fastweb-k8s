@@ -1,0 +1,79 @@
+module.exports = {
+  /**
+   * Application configuration section
+   * http://pm2.keymetrics.io/docs/usage/application-declaration/
+   */
+  apps: [
+
+    // VCP application
+    {
+      name: 'a3gw_vcp',
+      script: 'src/app.js',
+      env: {
+        env: 'development'
+      }
+    },
+
+    // CSP application
+    {
+      name: 'a3gw_csp',
+      script: 'src/app.js',
+      env: {
+        env: 'development',
+        jwt_config: 'jwt_config.json',
+        logger_config: 'logger_config.json',
+        server_config: 'server_config_csp.json',
+        service_proxies_file: 'service_proxies_csp.js'
+      }
+    },
+
+    // All static web applications
+    {
+      name: "http_static_server_8085",
+      script: "serve",
+      env: {
+        env: 'development',
+        "PM2_SERVE_PATH": '/var/www/html',
+        "PM2_SERVE_PORT": 8085
+      }
+    }
+
+  ],
+
+  /**
+   * Deployment section
+   * http://pm2.keymetrics.io/docs/usage/deployment/
+   */
+  deploy: {
+    test: {
+      user: 'root',
+      host: '10.35.36.75',
+      ref: 'origin/master_a3gw',
+      repo: 'git@stash.telenity.com:7999/a3g/a3gateway.git',
+      path: '/space/a3gw',
+      'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env test',
+      env: {
+        NODE_ENV: 'test'
+      }
+    },
+    preprod: {
+      user: 'node',
+      host: '212.83.163.1',
+      ref: 'origin/master',
+      repo: 'git@github.com:repo.git',
+      path: '/var/www/production',
+      'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env preprod',
+      env: {
+        NODE_ENV: 'preprod'
+      }
+    },
+    prod: {
+      user: 'node',
+      host: '212.83.163.1',
+      ref: 'origin/master',
+      repo: 'git@github.com:repo.git',
+      path: '/var/www/production',
+      'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env prod'
+    }
+  }
+};
