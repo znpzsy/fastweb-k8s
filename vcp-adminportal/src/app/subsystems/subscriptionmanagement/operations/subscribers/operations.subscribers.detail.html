@@ -1,0 +1,56 @@
+<div class="portlet-header">
+    <h4 class="portlet-title">
+        {{ 'Subsystems.SubscriptionManagement.Operations.Subscribers.Title' | translate }}
+    </h4>
+</div>
+
+<div class="portlet-body">
+
+    <form class="form-horizontal parsley-form" novalidate id="form" name="form" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="msisdn" class="col-md-3">{{ 'Subsystems.SubscriptionManagement.Operations.Subscribers.TableColumns.Msisdn' | translate }}</label>
+            <div class="col-md-7">
+                <input id="msisdn" name="msisdn" type="text" class="form-control" ng-value="subscriber.msisdn" ng-disabled="true"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="paymentType" class="col-md-3">{{ 'Subsystems.SubscriptionManagement.Operations.Subscribers.TableColumns.PaymentType' | translate }}</label>
+            <div class="col-md-7">
+                <input id="paymentType" name="paymentType" type="text" class="form-control" ng-value="subscriber.paymentType" ng-disabled="true"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="language" class="col-md-3">{{ 'Subsystems.SubscriptionManagement.Operations.Subscribers.TableColumns.Language' | translate }}</label>
+            <div class="col-md-7">
+                <input id="language" name="language" type="text" class="form-control" ng-value="subscriber.lang | LanguageAbbrFilter | translate" ng-disabled="true"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="currentState" class="col-md-3">{{ 'Subsystems.SubscriptionManagement.Operations.Subscribers.TableColumns.State' | translate }}</label>
+            <div class="col-md-7">
+                <input id="currentState" name="currentState" type="text" class="form-control" ng-value="subscriber.state.currentState" ng-disabled="true"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="contractId" class="col-md-3">{{ 'Subsystems.SubscriptionManagement.Operations.Subscribers.TableColumns.CreatedDate' | translate }}</label>
+            <div class="col-md-7">
+                <input id="contractId" name="contractId" type="text" class="form-control" ng-value="subscriber.createdDate | date:'yyyy-MM-dd HH:mm:ss':DateTimeConstants.OFFSET" ng-disabled="true"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-7 col-md-push-3">
+                <button type="reset" class="btn btn-default" ng-click="cancel();">
+                    {{ 'CommonLabels.Cancel' | translate }}
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+</div>

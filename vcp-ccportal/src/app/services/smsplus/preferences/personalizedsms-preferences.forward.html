@@ -1,0 +1,15 @@
+<div class="form-group">
+    <label class="col-md-3">{{ 'Services.PersonalizedSMS.Preferences.FormFields.Destination' | translate }}</label>
+    <div class="col-md-7">
+        <input type="text" class="form-control" ng-model="$parent.subscriptionPreferences.destination" id="destination" name="destination"
+               ng-maxlength="15" maxlength="15" ng-pattern="$root.Validators.Msisdn"
+               ng-required="true"
+               placeholder="{{ 'CommonLabels.SubscriberMsisdnPlaceholder' | translate}}"
+               ng-disabled="!AuthorizationService.canPreferencesAllUpdate()"/>
+        <ul ng-class="{ 'parsley-error-list': form.destination.$dirty && form.destination.$invalid }" ng-show="form.destination.$dirty && form.destination.$invalid">
+            <li class="required" ng-show="form.destination.$error.maxlength">{{ 'CommonMessages.MaxLengthError' | translate:{max_length: 15} }}</li>
+            <li class="required" ng-show="form.destination.$error.required">{{ 'CommonMessages.RequiredFieldError' | translate }}</li>
+            <li class="required" ng-show="form.destination.$error.pattern">{{ 'CommonMessages.NumericFieldError' | translate }}</li>
+        </ul>
+    </div>
+</div>

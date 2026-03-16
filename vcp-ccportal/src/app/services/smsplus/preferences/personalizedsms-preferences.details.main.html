@@ -1,0 +1,42 @@
+<div class="portlet-header">
+    <h4 class="portlet-title">
+        {{ 'Services.PersonalizedSMS.Preferences.PageHeader' | translate }} / {{ $state.current.data.pageHeaderKey | translate }}
+    </h4>
+</div>
+
+<div class="portlet-body">
+
+    <form class="form-horizontal parsley-form" novalidate id="form" name="form" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label class="col-md-3">{{ 'Services.PersonalizedSMS.Preferences.FormFields.Status' | translate }}</label>
+            <div class="col-md-7">
+                <div class="btn-group">
+                    <button type="button" class="btn {{subscriptionPreferences.status === 'ENABLED' ?'btn-primary active':'btn-default'}} btn-sm" ng-disabled="!AuthorizationService.canPreferencesAllUpdate()"
+                            ng-model="subscriptionPreferences.status" uib-btn-radio="'ENABLED'">{{ 'CommonLabels.Yes' | translate }}
+                    </button>
+                    <button type="button" class="btn {{subscriptionPreferences.status !== 'ENABLED' ?'btn-primary active':'btn-default'}} btn-sm" ng-disabled="!AuthorizationService.canPreferencesAllUpdate()"
+                            ng-model="subscriptionPreferences.status" uib-btn-radio="'DISABLED'">{{ 'CommonLabels.No' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <span ng-include="$state.current.data.otherFieldsTemplate" ng-if="subscriptionPreferences.status === 'ENABLED'"></span>
+
+        <div class="form-group">
+            <div class="col-md-7 col-md-push-3">
+                <button type="submit" class="btn btn-danger"
+                        ng-disabled="form.$invalid || !AuthorizationService.canPreferencesAllUpdate() || isNotChanged()"
+                        ng-click="save(subscriptionPreferences);">
+                    {{ 'CommonLabels.Save' | translate }}
+                </button>
+                <button type="reset" class="btn btn-default" ng-click="cancel();">
+                    {{ 'CommonLabels.Cancel' | translate }}
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+</div>

@@ -1,0 +1,46 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        {{'CommonLabels.ConfirmationModalTitle' | translate}}
+    </h4>
+</div>
+
+<div class="modal-body" style="padding-top: 30px;">
+
+    <form class="form-horizontal parsley-form" novalidate id="form" name="form" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <div class="col-md-12" ng-bind-html="confirmationMessage" ng-if="confirmationMessage"></div>
+            <div class="col-md-12" ng-if="!confirmationMessage">
+                {{ 'CommonLabels.ConfirmationRemoveMessage' | translate }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="oldNumber" class="col-md-3">{{ 'Services.MNN.Subscriptions.OldNumber' | translate }}</label>
+            <div class="col-md-7">
+                <input id="oldNumber" name="oldNumber" type="text" class="form-control"
+                       ng-model="subscriber.oldNumber"
+                       ng-pattern="$root.Validators.ScreeningListValidPhoneNumber"
+                       ng-maxlength="15" maxlength="15"
+                       ng-required="true"
+                       subscribers-number-check
+                       placeholder="{{ 'ScreeningLists.AddForm.ScreenableEntryId.Placeholder' | translate }}"/>
+                <ul ng-class="{ 'parsley-error-list': form.oldNumber.$dirty && form.oldNumber.$invalid }"
+                    ng-show="form.oldNumber.$dirty && form.oldNumber.$invalid">
+                    <li class="required" ng-show="form.oldNumber.$error.required">{{ 'CommonMessages.RequiredFieldError' | translate }}</li>
+                    <li class="required" ng-show="form.oldNumber.$error.maxlength">{{ 'CommonMessages.MaxLengthError' | translate:{max_length: 15} }}</li>
+                    <li class="required" ng-show="form.oldNumber.$error.pattern">{{ 'CommonMessages.InvalidPhoneNumber' | translate }}</li>
+                    <li class="required" ng-show="form.oldNumber.$error.subscribersNumberCheck">{{ 'CommonMessages.SubscribersNumber' | translate }}</li>
+                </ul>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary"
+            ng-disabled="form.$invalid || !AuthorizationService.canPreferencesAllUpdate()"
+            ng-click="ok(subscriber.oldNumber)">{{'CommonLabels.Yes' | translate}}</button>
+    <button class="btn btn-default" ng-click="cancel()">{{'CommonLabels.Cancel' | translate}}</button>
+</div>

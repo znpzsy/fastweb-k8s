@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ pageHeaderKey | translate }}</h4>
+</div>
+
+<div class="modal-body">
+
+    <form class="form-horizontal parsley-form" novalidate id="form" name="form" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="gt" class="col-md-3">{{ 'Products.AntiSpamSMS.Operations.Screenings.TableColumns.SMSHubGT' | translate }}</label>
+            <div class="col-md-9">
+                <input id="gt" name="gt" type="text" class="form-control"
+                       ng-model="entry.gt"
+                       ng-maxlength="50" maxlength="50"
+                       ng-required="true"
+                       ng-disabled="(entry.id ? true : !AuthorizationService.canCreate())"/>
+                <ul ng-class="{ 'parsley-error-list': form.gt.$dirty && form.gt.$invalid }"
+                    ng-show="form.gt.$dirty && form.gt.$invalid">
+                    <li class="required" ng-show="form.gt.$error.required">{{ 'CommonMessages.RequiredFieldError' | translate }}</li>
+                    <li class="required" ng-show="form.gt.$error.maxlength">{{ 'CommonMessages.MaxLengthError' | translate:{max_length: 50} }}</li>
+                    <li class="required" ng-show="form.gt.$error.availabilityCheck">{{ 'CommonMessages.ListItemAvailable' | translate }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="status" class="col-md-3">{{ 'CommonLabels.State' | translate }}</label>
+            <div class="col-md-9">
+                <select id="status" name="status" class="form-control"
+                        ng-model="entry.status"
+                        ng-options="opt for opt in STATES"
+                        ng-disabled="(entry.id ? !AuthorizationService.canUpdate() : !AuthorizationService.canCreate())">
+                </select>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary"
+            ng-disabled="form.$invalid || (entry.id ? !AuthorizationService.canUpdate() : !AuthorizationService.canCreate()) || isNotChanged()"
+            ng-click="save(entry)">
+        {{ 'CommonLabels.Save' | translate }}
+    </button>
+    <button class="btn btn-default" ng-click="cancel()">{{ 'CommonLabels.Cancel' | translate }}</button>
+</div>

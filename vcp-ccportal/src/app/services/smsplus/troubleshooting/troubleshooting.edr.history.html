@@ -1,0 +1,109 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ 'Services.PersonalizedSMS.Troubleshooting.History.PageHeader' | translate:{ origAddress: origAddress, destAddress: destAddress } }}</h4>
+</div>
+
+<div class="modal-body buttons-portlet-body">
+    <div class="row">
+        <div class="col-md-10 col-xs-9">
+            <div class="pull-left">
+                <span ng-if="submitDate">
+                    <label>{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumns.Date' | translate }}</label>:
+                    {{ submitDate | date:'yyyy-MM-dd HH:mm:ss':DateTimeConstants.OFFSET }}
+                </span>
+                <span ng-if="completionDate">
+                    &nbsp;&nbsp;&nbsp;
+                    <label>{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumns.CompletionDate' | translate }}</label>:
+                    {{ completionDate | date:'yyyy-MM-dd HH:mm:ss':DateTimeConstants.OFFSET }}
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-2 col-xs-3">
+            <div class="pull-right">
+                <div class="btn-group export-buttons-without-search" ng-show="personalizedSMSEdrHistoryList.tableParams.total() > 0">
+                    <button type="button" ng-click="csv.download('SMSPlusServiceHistoryRecords')" class="btn btn-sm btn-default">{{ 'Export.CSV' | translate }}</button>
+                    <button type="button" ng-click="xls.download('SMSPlusServiceHistoryRecords')" class="btn btn-sm btn-default">{{ 'Export.Excel' | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table ng-table="personalizedSMSEdrHistoryList.tableParams" class="table table-striped table-bordered"
+                       template-pagination="ngTableCustomPager.html"
+                       export-csv="csv" export-xls="xls"
+                       export-options="historyExportOptions">
+                    <thead>
+                    <tr>
+                        <th class="sortable"
+                            uib-popover="{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumnsTooltips.HistoryEventDate' | translate }}" popover-placement="top" popover-animation="false" popover-trigger="'mouseenter'" popover-append-to-body="true"
+                            ng-class="{'sort-asc': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.date', 'asc'), 'sort-desc': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.date', 'desc') }"
+                            ng-click="personalizedSMSEdrHistoryList.tableParams.sorting({'_source.date': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.date', 'asc') ? 'desc' : 'asc'})">
+                            <div>{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumns.HistoryEventDate' | translate }}</div>
+                        </th>
+                        <th class="sortable"
+                            uib-popover="{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumnsTooltips.ServiceType' | translate }}" popover-placement="top" popover-animation="false" popover-trigger="'mouseenter'" popover-append-to-body="true"
+                            ng-class="{'sort-asc': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.serviceTypeText', 'asc'), 'sort-desc': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.serviceTypeText', 'desc') }"
+                            ng-click="personalizedSMSEdrHistoryList.tableParams.sorting({'_source.serviceTypeText': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.serviceTypeText', 'asc') ? 'desc' : 'asc'})">
+                            <div>{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumns.ServiceType' | translate }}</div>
+                        </th>
+                        <th class="sortable"
+                            uib-popover="{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumnsTooltips.OriginalReceiver' | translate }}" popover-placement="top" popover-animation="false" popover-trigger="'mouseenter'" popover-append-to-body="true"
+                            ng-class="{'sort-asc': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.originalReceiver', 'asc'), 'sort-desc': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.originalReceiver', 'desc') }"
+                            ng-click="personalizedSMSEdrHistoryList.tableParams.sorting({'_source.originalReceiver': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.originalReceiver', 'asc') ? 'desc' : 'asc'})">
+                            <div>{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumns.OriginalReceiver' | translate }}</div>
+                        </th>
+                        <th class="sortable"
+                            uib-popover="{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumnsTooltips.RevisedReceiver' | translate }}" popover-placement="top" popover-animation="false" popover-trigger="'mouseenter'" popover-append-to-body="true"
+                            ng-class="{'sort-asc': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.revisedReceiver', 'asc'), 'sort-desc': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.revisedReceiver', 'desc') }"
+                            ng-click="personalizedSMSEdrHistoryList.tableParams.sorting({'_source.revisedReceiver': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.revisedReceiver', 'asc') ? 'desc' : 'asc'})">
+                            <div>{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumns.RevisedReceiver' | translate }}</div>
+                        </th>
+                        <th class="sortable"
+                            uib-popover="{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumnsTooltips.Status' | translate }}" popover-placement="top" popover-animation="false" popover-trigger="'mouseenter'" popover-append-to-body="true"
+                            ng-class="{'sort-asc': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.status', 'asc'), 'sort-desc': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.status', 'desc') }"
+                            ng-click="personalizedSMSEdrHistoryList.tableParams.sorting({'_source.status': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.status', 'asc') ? 'desc' : 'asc'})">
+                            <div>{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumns.Status' | translate }}</div>
+                        </th>
+                        <th class="sortable"
+                            uib-popover="{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumnsTooltips.ExecutionStatusCode' | translate }}" popover-placement="top" popover-animation="false" popover-trigger="'mouseenter'" popover-append-to-body="true"
+                            ng-class="{'sort-asc': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.executionStatusCodeText', 'asc'), 'sort-desc': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.executionStatusCodeText', 'desc') }"
+                            ng-click="personalizedSMSEdrHistoryList.tableParams.sorting({'_source.executionStatusCodeText': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.executionStatusCodeText', 'asc') ? 'desc' : 'asc'})">
+                            <div>{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumns.ExecutionStatusCode' | translate }}</div>
+                        </th>
+                        <th class="sortable"
+                            uib-popover="{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumnsTooltips.Result' | translate }}" popover-placement="top" popover-animation="false" popover-trigger="'mouseenter'" popover-append-to-body="true"
+                            ng-class="{'sort-asc': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.result', 'asc'), 'sort-desc': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.result', 'desc') }"
+                            ng-click="personalizedSMSEdrHistoryList.tableParams.sorting({'_source.result': personalizedSMSEdrHistoryList.tableParams.isSortBy('_source.result', 'asc') ? 'desc' : 'asc'})">
+                            <div>{{ 'Services.PersonalizedSMS.Troubleshooting.TableColumns.Result' | translate }}</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in $data" class="hidden-link-cell-row"
+                        ng-class="{ 'text-danger': isHighlightHistoryRecord(item._source.executionStatusCode) }">
+                        <td align="center">{{ item._source.date | date:'yyyy-MM-dd HH:mm:ss':DateTimeConstants.OFFSET }}</td>
+                        <td align="center">{{ item._source.serviceTypeText }}</td>
+                        <td align="center">{{ item._source.originalReceiver }}</td>
+                        <td align="center">{{ item._source.revisedReceiver }}</td>
+                        <td align="center">{{ item._source.status }}</td>
+                        <td align="center">{{ item._source.executionStatusCodeText }}</td>
+                        <td align="center">{{ item._source.result }}</td>
+                    </tr>
+                    <tr ng-if="$data.length === 0">
+                        <td colspan="7" class="text-center">{{ 'CommonMessages.EmptyTable' | translate }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="close()">{{'CommonLabels.Close' | translate}}</button>
+</div>

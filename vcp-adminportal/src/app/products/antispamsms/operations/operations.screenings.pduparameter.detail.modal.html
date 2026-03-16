@@ -1,0 +1,118 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ pageHeaderKey | translate }}</h4>
+</div>
+
+<div class="modal-body">
+
+    <form class="form-horizontal parsley-form" novalidate id="form" name="form" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="name" class="col-md-3">{{ 'Products.AntiSpamSMS.Operations.Screenings.TableColumns.ParameterName' | translate }}</label>
+            <div class="col-md-9">
+                <input id="name" name="name" type="text" class="form-control"
+                       ng-model="entry.name"
+                       ng-maxlength="100" maxlength="100"
+                       ng-required="true"
+                       ng-disabled="(entry.id ? true : !AuthorizationService.canCreate())"/>
+                <ul ng-class="{ 'parsley-error-list': form.name.$dirty && form.name.$invalid }"
+                    ng-show="form.name.$dirty && form.name.$invalid">
+                    <li class="required" ng-show="form.name.$error.required">{{ 'CommonMessages.RequiredFieldError' | translate }}</li>
+                    <li class="required" ng-show="form.name.$error.maxlength">{{ 'CommonMessages.MaxLengthError' | translate:{max_length: 100} }}</li>
+                    <li class="required" ng-show="form.name.$error.availabilityCheck">{{ 'CommonMessages.ListItemAvailable' | translate }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="screeningParameters" class="col-md-3">{{ 'Products.AntiSpamSMS.Operations.Screenings.TableColumns.ParameterValue' | translate }}</label>
+            <div class="col-md-9">
+                <textarea id="screeningParameters" name="screeningParameters" type="text" class="form-control"
+                          uib-popover="{{ 'Products.AntiSpamSMS.Operations.Screenings.PDUParameter.ScreeningParametersTooltip' | translate }}"
+                          popover-placement="top" popover-animation="false" popover-trigger="'focus'" popover-append-to-body="true"
+                          ng-model="entry.screeningParameters"
+                          ng-maxlength="500" maxlength="500"
+                          ng-required="true"
+                          ng-disabled="(entry.id ? !AuthorizationService.canUpdate() : !AuthorizationService.canCreate())">
+                </textarea>
+                <ul ng-class="{ 'parsley-error-list': form.screeningParameters.$dirty && form.screeningParameters.$invalid }"
+                    ng-show="form.screeningParameters.$dirty && form.screeningParameters.$invalid">
+                    <li class="required" ng-show="form.screeningParameters.$error.required">{{ 'CommonMessages.RequiredFieldError' | translate }}</li>
+                    <li class="required" ng-show="form.screeningParameters.$error.maxlength">{{ 'CommonMessages.MaxLengthError' | translate:{max_length: 500} }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="action" class="col-md-3">{{ 'Products.AntiSpamSMS.Operations.Screenings.TableColumns.Action' | translate }}</label>
+            <div class="col-md-9">
+                <select id="action" name="action" class="form-control"
+                        ng-model="entry.action"
+                        ng-options="opt.value as opt.label for opt in SMS_ANTISPAM_ACTIONS"
+                        ng-disabled="(entry.id ? !AuthorizationService.canUpdate() : !AuthorizationService.canCreate())">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="priority" class="col-md-3">{{ 'Products.AntiSpamSMS.Operations.Screenings.TableColumns.Priority' | translate }}</label>
+            <div class="col-md-9">
+                <input id="priority" name="priority" type="number" class="form-control"
+                       ng-model="entry.priority"
+                       ng-required="true"
+                       ng-min="0" ng-max="999999"
+                       ng-disabled="(entry.id ? !AuthorizationService.canUpdate() : !AuthorizationService.canCreate())"/>
+                <ul ng-class="{ 'parsley-error-list': form.priority.$dirty && form.priority.$invalid }"
+                    ng-show="form.priority.$dirty && form.priority.$invalid">
+                    <li class="required" ng-show="form.priority.$error.min">{{ 'CommonMessages.MinValueError' | translate:{min: 0} }}</li>
+                    <li class="required" ng-show="form.priority.$error.max">{{ 'CommonMessages.MaxValueError' | translate:{max: 999999} }}</li>
+                    <li class="required" ng-show="form.priority.$error.number">{{ 'CommonMessages.NumericFieldError' | translate }}</li>
+                    <li class="required" ng-show="form.priority.$error.required">{{ 'CommonMessages.RequiredFieldError' | translate }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="rejectMethod" class="col-md-3">{{ 'Products.AntiSpamSMS.Operations.Screenings.TableColumns.PolicyInEffect' | translate }}</label>
+            <div class="col-md-9">
+                <select id="rejectMethod" name="rejectMethod" class="form-control"
+                        ng-model="entry.rejectMethod"
+                        ng-options="policy for policy in SMS_ANTISPAM_REJECT_METHODS_2"
+                        ng-disabled="(entry.id ? !AuthorizationService.canUpdate() : !AuthorizationService.canCreate())">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="moRejectCode" class="col-md-3">{{ 'Products.AntiSpamSMS.Operations.Screenings.TableColumns.MORejectionErrorCode' | translate }}</label>
+            <div class="col-md-9">
+                <select id="moRejectCode" name="moRejectCode" class="form-control"
+                        ng-model="entry.moRejectCode"
+                        ng-options="rejectionErrorCode for rejectionErrorCode  in SMS_ANTISPAM_REJECTION_ERROR_CODES"
+                        ng-disabled="(entry.id ? !AuthorizationService.canUpdate() : !AuthorizationService.canCreate())">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="mtRejectCode" class="col-md-3">{{ 'Products.AntiSpamSMS.Operations.Screenings.TableColumns.MTRejectionErrorCode' | translate }}</label>
+            <div class="col-md-9">
+                <select id="mtRejectCode" name="mtRejectCode" class="form-control"
+                        ng-model="entry.mtRejectCode"
+                        ng-options="rejectionErrorCode for rejectionErrorCode  in SMS_ANTISPAM_REJECTION_ERROR_CODES"
+                        ng-disabled="(entry.id ? !AuthorizationService.canUpdate() : !AuthorizationService.canCreate())">
+                </select>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary"
+            ng-disabled="form.$invalid || (entry.id ? !AuthorizationService.canUpdate() : !AuthorizationService.canCreate()) || isNotChanged()"
+            ng-click="save(entry)">
+        {{ 'CommonLabels.Save' | translate }}
+    </button>
+    <button class="btn btn-default" ng-click="cancel()">{{ 'CommonLabels.Cancel' | translate }}</button>
+</div>
